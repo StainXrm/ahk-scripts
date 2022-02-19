@@ -1,2 +1,2 @@
 # ahk-scripts
- A collection of my autohotkey "handy helpers"
+Meine persönlichen AutoHotKey scripts, um nerviges zu Automatisieren.
