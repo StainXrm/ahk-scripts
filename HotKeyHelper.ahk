@@ -88,6 +88,17 @@ if( WinActive("ahk_exe FontBase.exe") ){
 return
 
 #IfWinActive ahk_exe thunderbird.exe
+~^c::
+Sleep, 100
+ClipWait, 1
+oldClip = %Clipboard%
+newClip := RegExReplace(oldClip, "[ ]+" ," ")
+newClip := RegExReplace(newClip, "[\r\n]{2,}" ,"`r`n")
+Clipboard := newClip 
+; MsgBox %newClip%
+return
+
+#IfWinActive ahk_exe thunderbird.exe
 :C:WGM::
     Send, Einen wunderschönen, guten Morgen{!}
 return
@@ -122,7 +133,7 @@ return
 #IfWinActive ahk_exe thunderbird.exe
 ::hi::
 {
-    If A_Hour between 4 and 10 ;morining glory!
+    If A_Hour between 4 and 9 ;morining glory!
     {
         Random, rnd,0,2
         Switch rnd

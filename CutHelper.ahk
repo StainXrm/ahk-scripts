@@ -13,12 +13,13 @@ Loop{
         Sleep, 100
         BlockInput, On
         WinActivate, %A_LoopFileName% ahk_class illustrator
-        Sleep, 200
+        Sleep, 400
         Send, {Shift down}{Ctrl down}
-        Sleep, 50
+        Sleep, 100
         Send, {F12}
-        Sleep, 50
+        Sleep, 100
         Send, {Shift up}{Ctrl up}
+        Sleep, 100
         WinMinimize, ahk_class illustrator
 
 

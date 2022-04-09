@@ -5,7 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #SingleInstance, force
 
-BUFFERTIME := 300
+BUFFERTIME := 100
 
 ;#NoTrayIcon
 #F12::ExitApp  ; Quit Script with Win+F12
@@ -27,40 +27,33 @@ BUFFERTIME := 300
   }
   BlockInput, On
   Sleep, BUFFERTIME ;tiny buffer just to make sure everyhing is ready.
-  Path := GetActiveExplorerPath() ;get the path of the folder where the file is in.
+  Send, !e ;Select Adressbar
+  Sleep, BUFFERTIME
+  Send, ^c ;Copy to Clipboard Send,^+E ;Select Adressbar
+  Send, ^c ;Copy to Clipboard Send,^+E ;Select Adressbar
+  Send, ^c ;Copy to Clipboard Send,^+E ;Select Adressbar
+  Send, ^c ;Copy to Clipboard Send,^+E ;Select Adressbar
+  Sleep, BUFFERTIME
   WinClose, A
-  WinActivate, ahk_exe Publisher.exe
-  Send, !^+s ;Affinity Publisher default hotkey for Export Alt+Ctrl+Shift+s
+  WinActivate, ahk_exe Publisher.exe 
+  Sleep, BUFFERTIME
+  Send, !^+s ;Affinity Publisher default hotkey for Export Alt+Ctrl+Shift+s 
   BlockInput, Off
 
   WinWaitNotActive, ahk_id %hwndPub% ;Main Publisher not in Focus anymore!
 
   WinWaitNotActive, Export ;Wait for export window to close (this also includes the more options window)
-  WinWaitActive, ahk_class #32770,,4 ;wait for save window with timeout!
-  if ErrorLevel 
-  return ;timeout occured!
+  WinWaitActive, ahk_class #32770,,3
+  if ErrorLevel { ;timeout occured! (Also happens if the file is not saved on the first place)
+    return ;and exit
+  }
   ;now enter the path of the file source folder!
 
   BlockInput, On
-  Sleep, BUFFERTIME ;tiny buffer just to make sure everyhing is ready.
+  Sleep, 200 ;tiny buffer just to make sure everyhing is ready.
   Send, {AltDown}e{AltUp} ;windows hotkey to go directly to address bar, as writing directly to control seems messy on win11
-  SendInput, %Path%/{enter} ;send path
+  Send %Clipboard%/{enter}
+  ;SendInput, %Path%/{enter} ;send path
   BlockInput, Off
 }
 return
-
-
-GetActiveExplorerPath()
-{
-	explorerHwnd := WinActive("ahk_class CabinetWClass")
-	if (explorerHwnd)
-	{
-		for window in ComObjCreate("Shell.Application").Windows
-		{
-			if (window.hwnd==explorerHwnd)
-			{
-				return window.Document.Folder.Self.Path
-			}
-		}
-	}
-}
