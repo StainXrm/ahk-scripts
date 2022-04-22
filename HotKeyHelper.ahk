@@ -131,6 +131,11 @@ return
 return
 
 #IfWinActive ahk_exe thunderbird.exe
+::f&a::
+    Send, Bei Fragen oder Anregungen bitte einfach bei mir melden{.}
+return
+
+#IfWinActive ahk_exe thunderbird.exe
 ::hi::
 {
     If A_Hour between 4 and 9 ;morining glory!
