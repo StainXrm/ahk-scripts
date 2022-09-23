@@ -125,18 +125,18 @@ return
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-::mfg::
+:C:MFG::
     Send, Mit freundlichen Grüßen `n `r
     Send, {tab}Rainer Mayrhofer
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-::f&a::
+:C:FUA::
     Send, Bei Fragen oder Anregungen bitte einfach bei mir melden{.}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-::hi::
+:C:HI::
 {
     If A_Hour between 4 and 9 ;morining glory!
     {
@@ -185,7 +185,7 @@ return
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-:C:DF::
+:C:DSF::
     Send, Hi{!} `n `r
     Send, Kurze Info: `n
     Send, Die Drucksorten wären fertig.😊`n `r
@@ -208,7 +208,7 @@ return
 ~^p::
     BlockInput On
     Sleep, 300
-    Send, {Tab}{Tab}{Tab}{Down}1{Enter}
+    Send, {Tab 3}{Down 3}1{Enter}
     BlockInput Off
 return
 
