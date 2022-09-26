@@ -7,10 +7,12 @@ DetectHiddenWindows, On
 #Persistent
 #SingleInstance, force
 #InstallKeybdHook
+SetKeyDelay, 100
 
-;Check for that useless: Network error window and close it!
-SetTimer, ExplorerSucks, 1000
+;Check for that useless: Network error window and close it! Also skips the new useless Printer window on ID
+SetTimer, WindowsSucks, 500
 return
+
 
 ; #IfWinActive ahk_exe Code.exe
  ~^s::
@@ -213,7 +215,16 @@ return
 return
 
 ;Check for that useless: Network error window and close it!
-ExplorerSucks:
+WindowsSucks:
+
+if( WinActive("Drucken aus der Win32-Anwendung. – Drucken") ){
+    Sleep, 1000
+    Send, {ShiftDown}{Tab 5}{ShiftUp}{Enter}
+    ; Sleep, 2000
+    ; WinWaitActive, Drucken aus der Win32-Anwendung. – Drucken
+    ; Send, {Tab}{Enter}
+}
+
 while WinExist("Netzwerkfehler ahk_class #32770 ahk_exe explorer.exe") {
     WinKill, Netzwerkfehler ahk_class #32770 ahk_exe explorer.exe
 }
