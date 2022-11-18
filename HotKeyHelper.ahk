@@ -108,22 +108,22 @@ return
 #IfWinActive ahk_exe thunderbird.exe
 :C:SGH::
     Send, Sehr geehrter Herr %Clipboard%, `n `r
-    Send,Mit freundlichen Grüßen `n `r
-    Send,{Tab}Rainer Mayrhofer{Up 2}
+    Send, Mit freundlichen Grüßen `n `r
+    Send, {Tab}Rainer Mayrhofer{Up 2}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
 :C:SGF::
     Send, Sehr geehrte Frau %Clipboard%, `n `r
-    Send,Mit freundlichen Grüßen `n `r
-    Send,{Tab}Rainer Mayrhofer{Up 2}
+    Send, Mit freundlichen Grüßen `n `r
+    Send, {Tab}Rainer Mayrhofer{Up 2}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
 :C:SGDH::
-    Send,Sehr geehrte Damen und Herren, `n `r
-    Send,Mit freundlichen Grüßen `n `r
-    Send,{Tab}Rainer Mayrhofer{Up 2}
+    Send, Sehr geehrte Damen und Herren, `n `r
+    Send, Mit freundlichen Grüßen `n `r
+    Send, {Tab}Rainer Mayrhofer{Up 2}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
