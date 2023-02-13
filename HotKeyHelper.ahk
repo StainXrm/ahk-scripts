@@ -7,10 +7,12 @@ DetectHiddenWindows, On
 #Persistent
 #SingleInstance, force
 #InstallKeybdHook
+SetKeyDelay, 100
 
-;Check for that useless: Network error window and close it!
-SetTimer, ExplorerSucks, 1000
+;Check for that useless: Network error window and close it! Also skips the new useless Printer window on ID
+SetTimer, WindowsSucks, 500
 return
+
 
 ; #IfWinActive ahk_exe Code.exe
  ~^s::
@@ -106,37 +108,37 @@ return
 #IfWinActive ahk_exe thunderbird.exe
 :C:SGH::
     Send, Sehr geehrter Herr %Clipboard%, `n `r
-    Send,Mit freundlichen Grüßen `n `r
-    Send,{Tab}Rainer Mayrhofer{Up 2}
+    Send, Mit freundlichen Grüßen `n `r
+    Send, {Tab}Rainer Mayrhofer{Up 2}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
 :C:SGF::
     Send, Sehr geehrte Frau %Clipboard%, `n `r
-    Send,Mit freundlichen Grüßen `n `r
-    Send,{Tab}Rainer Mayrhofer{Up 2}
+    Send, Mit freundlichen Grüßen `n `r
+    Send, {Tab}Rainer Mayrhofer{Up 2}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
 :C:SGDH::
-    Send,Sehr geehrte Damen und Herren, `n `r
-    Send,Mit freundlichen Grüßen `n `r
-    Send,{Tab}Rainer Mayrhofer{Up 2}
+    Send, Sehr geehrte Damen und Herren, `n `r
+    Send, Mit freundlichen Grüßen `n `r
+    Send, {Tab}Rainer Mayrhofer{Up 2}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-::mfg::
+:C:MFG::
     Send, Mit freundlichen Grüßen `n `r
     Send, {tab}Rainer Mayrhofer
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-::f&a::
+:C:FUA::
     Send, Bei Fragen oder Anregungen bitte einfach bei mir melden{.}
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-::hi::
+:C:HI::
 {
     If A_Hour between 4 and 9 ;morining glory!
     {
@@ -185,7 +187,7 @@ return
 return
 
 #IfWinActive ahk_exe thunderbird.exe
-:C:DF::
+:C:DSF::
     Send, Hi{!} `n `r
     Send, Kurze Info: `n
     Send, Die Drucksorten wären fertig.😊`n `r
@@ -208,12 +210,21 @@ return
 ~^p::
     BlockInput On
     Sleep, 300
-    Send, {Tab}{Tab}{Tab}{Down}1{Enter}
+    Send, {Tab 3}{Down 3}1{Enter}
     BlockInput Off
 return
 
 ;Check for that useless: Network error window and close it!
-ExplorerSucks:
+WindowsSucks:
+
+; if( WinActive("Drucken aus der Win32-Anwendung. – Drucken") ){
+;     Sleep, 1000
+;     Send, {ShiftDown}{Tab 5}{ShiftUp}{Enter}
+;     ; Sleep, 2000
+;     ; WinWaitActive, Drucken aus der Win32-Anwendung. – Drucken
+;     ; Send, {Tab}{Enter}
+; }
+
 while WinExist("Netzwerkfehler ahk_class #32770 ahk_exe explorer.exe") {
     WinKill, Netzwerkfehler ahk_class #32770 ahk_exe explorer.exe
 }
